@@ -25,7 +25,7 @@ public class Event extends BaseTimeEntity implements Serializable {
     @Column
     private EventTargetType eventTargetType;
     @Column
-    private Long eventTargetId;
+    private UUID eventTargetId;
     @Column
     private EventActionType eventActionType;
     @Column

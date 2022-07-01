@@ -1,6 +1,7 @@
 package com.triple.travelerclubmileage.model.review.entity;
 
 import com.triple.travelerclubmileage.model.common.time.entity.BaseTimeEntity;
+import com.triple.travelerclubmileage.model.photo.entity.Photo;
 import com.triple.travelerclubmileage.model.place.entity.Place;
 import com.triple.travelerclubmileage.model.user.entity.User;
 import lombok.Getter;
@@ -10,6 +11,8 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -35,4 +38,8 @@ public class Review extends BaseTimeEntity implements Serializable {
     private User user;
     @Column
     private Boolean isEnabled;
+    @Column
+    private Boolean isFirst;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "review")
+    private List<Photo> photos = new ArrayList<>();
 }

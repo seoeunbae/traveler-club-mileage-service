@@ -1,4 +1,7 @@
 package com.triple.travelerclubmileage.model.event.repository;
 
-public interface EventRepository {
+import com.triple.travelerclubmileage.model.event.entity.Event;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EventRepository extends JpaRepository<Event, Long> {
 }

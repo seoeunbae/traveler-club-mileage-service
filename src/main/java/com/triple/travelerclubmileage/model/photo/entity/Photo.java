@@ -21,7 +21,7 @@ public class Photo extends BaseTimeEntity implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "photo_id")
-    private UUID PhotoId;
+    private UUID photoId;
     @Column
     private String resource;
     @Column

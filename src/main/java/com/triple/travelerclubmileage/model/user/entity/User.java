@@ -32,7 +32,7 @@ public class User extends BaseTimeEntity implements Serializable {
     @Column
     private UserRole role;
     @Column
-    private Long point;
+    private Integer mileage;
     @Column
     private Boolean isEnabled;
     private enum UserRole{
