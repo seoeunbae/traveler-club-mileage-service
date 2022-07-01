@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,20 +27,20 @@ public class Review extends BaseTimeEntity implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "review_id")
-    private UUID reviewId;
+    private String reviewId;
     @Lob
     @Column
     private String content;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "place_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "place_id", referencedColumnName = "place_id")
     private Place place;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
     @Column
     private Boolean isEnabled;
     @Column
     private Boolean isFirst;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "review")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "review", cascade = CascadeType.REMOVE)
     private List<Photo> photos = new ArrayList<>();
 }

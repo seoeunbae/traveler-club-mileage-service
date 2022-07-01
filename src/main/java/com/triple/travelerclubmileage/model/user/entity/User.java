@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +21,7 @@ public class User extends BaseTimeEntity implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "user_id")
-    private UUID userId;
+    private String userId;
     @Column(length = 20) //우리나라 가장 긴 이름:17자
     private String username;
     @Column(length = 20)
@@ -35,7 +36,7 @@ public class User extends BaseTimeEntity implements Serializable {
     private Integer mileage;
     @Column
     private Boolean isEnabled;
-    private enum UserRole{
+    public enum UserRole{
         USER_ROLE, ADMIN_ROLE
     }
 }

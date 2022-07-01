@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +21,7 @@ public class Place extends BaseTimeEntity implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "place_id")
-    private UUID placeId;
+    private String placeId;
     @Column(length = 100)
     private String name;
     @Lob
@@ -30,9 +31,8 @@ public class Place extends BaseTimeEntity implements Serializable {
     private String location;
     @Column
     private PlaceType type;
-//    @Column
-//    private Integer reviewCount;
-    private enum PlaceType{
+
+    public enum PlaceType{
         FOOD, SIGHTSEEING, TOUR
     }
 }

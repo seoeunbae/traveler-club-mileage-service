@@ -4,6 +4,7 @@ import com.triple.travelerclubmileage.model.event.entity.Event;
 import com.triple.travelerclubmileage.model.event.request.EventRequest;
 import com.triple.travelerclubmileage.model.photo.entity.Photo;
 import com.triple.travelerclubmileage.model.photo.repository.PhotoRepository;
+import com.triple.travelerclubmileage.model.place.entity.Place;
 import com.triple.travelerclubmileage.model.place.exception.PlaceException;
 import com.triple.travelerclubmileage.model.place.repository.PlaceRepository;
 import com.triple.travelerclubmileage.model.review.entity.Review;
@@ -23,23 +24,23 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 @RequiredArgsConstructor
 public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
     private final PlaceRepository placeRepository;
     private final PhotoRepository photoRepository;
-    private Boolean isFirst(final UUID placeId){
-        return !reviewRepository.existsByPlaceId(placeId);
+    private Boolean isFirst(final String placeId){
+        return !reviewRepository.existsByPlacePlaceId(placeId);
     }
     private Boolean existsByContent(final String content){
         return content.length() >= 1;
     }
-    private Boolean existsByPhoto(final UUID[] photos){
+    private Boolean existsByPhoto(final String[] photos){
         return photos.length >= 1;
     }
-    private void changeMileageByFirst(Review review, Event.EventActionType action,User user, UUID placeId){
+    private void changeMileageByFirst(Review review, Event.EventActionType action, User user, String placeId){
         if (isFirst(placeId) && action.equals(Event.EventActionType.ADD)) {
             review.setIsFirst(true);
             user.setMileage(+1);
@@ -50,7 +51,7 @@ public class ReviewService {
         else if (existsByContent(content) && action.equals(Event.EventActionType.MOD) && content.length() < 1) user.setMileage(+1);//수정시, 기존에 리뷰의 글이 없다가 생긴경우, 마일리지 +1;
         else if (action.equals(Event.EventActionType.DELETE) && content.length() >= 1) user.setMileage(-1); //삭제시, 기존에 리뷰의 글이 있었던 경우, 마일리지 -1;
     }
-    private void changeMileageByPhoto(User user, Event.EventActionType action, UUID[] photos ,UUID reviewId){
+    private void changeMileageByPhoto(User user, Event.EventActionType action, String[] photos ,String reviewId){
         List<Photo> allByReviewId = photoRepository.findAllByReviewId(reviewId);
         if(existsByPhoto(photos) && action.equals(Event.EventActionType.ADD)) user.setMileage(+1);
         else if (existsByPhoto(photos) && action.equals(Event.EventActionType.MOD) && allByReviewId.isEmpty()) { //수정시, 기존에 없던 이미지가 추가되는 경우, 마일리지 +1;
@@ -65,13 +66,11 @@ public class ReviewService {
     ){
         final User user = userRepository.findByUserId(request.getUserId())
                 .orElseThrow(UserException.UserNotExistException::new);
-
+        final Place place = placeRepository.findByPlaceId(request.getPlaceId())
+                .orElseThrow(PlaceException.PlaceNotExistException::new);
         Review review = EventRequest.toReviewEntity(request);
         review.setUser(user);
-        review.setPlace(
-                placeRepository.findByPlaceId(request.getPlaceId())
-                        .orElseThrow(PlaceException.PlaceNotExistException::new)
-        );
+        review.setPlace(place);
 
         changeMileageByFirst(review, request.getAction(), user, request.getPlaceId());
         changeMileageByContent(request.getContent(),request.getAction(), user);
@@ -94,7 +93,7 @@ public class ReviewService {
                 .orElseThrow(ReviewException.ReviewNotExistException::new);
 
         List<Photo> photos = new ArrayList<>();
-        for(UUID photoId :request.getAttachedPhotoIds()){
+        for(String photoId :request.getAttachedPhotoIds()){
             photos.add(photoRepository.findByPhotoId(photoId).orElseThrow());
         }
 
@@ -108,6 +107,9 @@ public class ReviewService {
     ){
         final User user = userRepository.findByUserId(request.getUserId())
                 .orElseThrow(UserException.UserNotExistException::new);
+        final Place place = placeRepository.findByPlaceId(request.getPlaceId())
+                .orElseThrow(PlaceException.PlaceNotExistException::new);
+
         Review review = reviewRepository.findByReviewId(request.getReviewId()).orElseThrow(ReviewException.ReviewNotExistException::new);
 
         changeMileageByPhoto(user, request.getAction(), request.getAttachedPhotoIds(),request.getReviewId());

@@ -10,15 +10,15 @@ import java.util.UUID;
 public class EventRequest {
     private Event.EventTargetType type;
     private Event.EventActionType action;
-    private UUID reviewId;
+    private String reviewId;
     private String content;
-    private UUID[] attachedPhotoIds;
-    private UUID userId;
-    private UUID placeId;
+    private String[] attachedPhotoIds;
+    private String userId;
+    private String placeId;
 
     public static Event toEventEntity(EventRequest request){
         Event event = new Event();
-        event.setEventId(UUID.randomUUID());
+        event.setEventId(UUID.randomUUID().toString());
         event.setEventTargetId(request.getReviewId());
         event.setEventActionType(request.getAction());
         event.setIsEnabled(true);

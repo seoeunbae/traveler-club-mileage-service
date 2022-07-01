@@ -7,6 +7,7 @@ import com.triple.travelerclubmileage.model.review.response.ReviewResponse;
 import com.triple.travelerclubmileage.model.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/events")
 @RequiredArgsConstructor
+@Transactional
 @Log4j2
 public class EventController {
     private final EventService eventService;

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,17 +22,17 @@ public class Photo extends BaseTimeEntity implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "photo_id")
-    private UUID photoId;
+    private String photoId;
     @Column
     private String resource;
     @Column
     private PhotoType type;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "review_id")
+    @JoinColumn(name = "review_id", referencedColumnName = "review_id")
     private Review review;
     @Column
     private Boolean isEnabled;
-    private enum PhotoType{
+    public enum PhotoType{
         REVIEW, PLACE, USER, AIRPLANE
     }
 }

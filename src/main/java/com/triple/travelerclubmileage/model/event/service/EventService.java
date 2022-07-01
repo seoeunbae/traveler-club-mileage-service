@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional()
+@Transactional
 @RequiredArgsConstructor
 @Log4j2
 public class EventService {
@@ -21,7 +21,7 @@ public class EventService {
     private final UserRepository userRepository;
 
     public EventResponse saveEvent(EventRequest request){
-        log.info("리뷰 고유 번호 : "+request.getReviewId()+" , 행위 : "+request.getAction()+"유저 정보 : "+request.getUserId());
+        log.info("리뷰 ID : "+request.getReviewId()+" , 행위 : "+request.getAction()+" , 유저 ID : "+request.getUserId());
         Event event = EventRequest.toEventEntity(request);
         event.setUser(
                 userRepository.findByUserId(request.getUserId())

@@ -6,9 +6,9 @@ import lombok.Builder;
 import java.util.UUID;
 @Builder
 public class ReviewResponse {
-    private UUID reviewId;
-    private UUID userId;
-    private UUID placeId;
+    private String reviewId;
+    private String userId;
+    private String placeId;
 
     public static ReviewResponse toResponse(Review review){
         return ReviewResponse.builder()

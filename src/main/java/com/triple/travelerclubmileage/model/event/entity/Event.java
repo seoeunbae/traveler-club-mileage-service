@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,17 +22,17 @@ public class Event extends BaseTimeEntity implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "event_id")
-    private UUID eventId;
+    private String eventId;
     @Column
     private EventTargetType eventTargetType;
     @Column
-    private UUID eventTargetId;
+    private String eventTargetId;
     @Column
     private EventActionType eventActionType;
     @Column
     private Boolean isEnabled;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
     public enum EventTargetType{
         REVIEW, REPORT, PLACE
