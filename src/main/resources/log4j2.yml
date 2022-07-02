@@ -39,7 +39,7 @@ Configutation:
     Logger:
       - name: edu.project
         additivity: false
-        level: debug
+        level: info
         AppenderRef:
           - ref: Console_Appender
           - ref: File_Appender

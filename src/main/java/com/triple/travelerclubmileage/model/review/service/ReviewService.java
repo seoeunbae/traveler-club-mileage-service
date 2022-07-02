@@ -46,11 +46,11 @@ public class ReviewService {
     public void changeMileageByFirst(Review review, Event.EventActionType action, User user, UUID placeId){
         if (isFirst(placeId) && action.equals(Event.EventActionType.ADD)) {
             review.setIsFirst(true);
-            logger.info(user.getId()+" user.mileage++ at "+ LocalDateTime.now());
+            logger.info(user.getId()+" user.mileage+1 at "+ LocalDateTime.now());
             user.setMileage(user.getMileage()+1);
         } else if(action.equals(Event.EventActionType.DELETE)){
             if(review.getIsFirst() ){
-                logger.info(user.getId()+ " user.mileage-- at "+ LocalDateTime.now());
+                logger.info(user.getId()+ " user.mileage-1 at "+ LocalDateTime.now());
                 user.setMileage(user.getMileage()-1);
             }
         }
@@ -58,16 +58,16 @@ public class ReviewService {
     public void changeMileageByContent(String content,Event.EventActionType action, User user){
 
         if (existsByContent(content) && action.equals(Event.EventActionType.ADD) )   {
-            logger.info(user.getId()+" user.mileage++ at "+ LocalDateTime.now());
+            logger.info(user.getId()+" user.mileage+1 at "+ LocalDateTime.now());
             user.setMileage(user.getMileage()+1);
         } else if (existsByContent(content) && action.equals(Event.EventActionType.MOD) && content.length() < 1) {
-            logger.info(user.getId()+" user.mileage++ at "+ LocalDateTime.now());
+            logger.info(user.getId()+" user.mileage+1 at "+ LocalDateTime.now());
             user.setMileage(user.getMileage()+1);//수정시, 기존에 리뷰의 글이 없다가 생긴경우, 마일리지 +1;
         } else if (!existsByContent(content) && action.equals(Event.EventActionType.MOD) && content.length()==0)  {
-            logger.info(user.getId()+" user.mileage-- at "+ LocalDateTime.now());
+            logger.info(user.getId()+" user.mileage-1 at "+ LocalDateTime.now());
             user.setMileage(user.getMileage()-1);//수정시, 기존에 리뷰의 글이 있다가 사라지는 경우, 마일리지 -1;
         } else if (action.equals(Event.EventActionType.DELETE) && content.length() >= 1)   {
-            logger.info(user.getId()+" user.mileage-- at "+ LocalDateTime.now());
+            logger.info(user.getId()+" user.mileage-1 at "+ LocalDateTime.now());
             user.setMileage(user.getMileage()-1); //삭제시, 기존에 리뷰의 글이 있었던 경우, 마일리지 -1;
         }
     }
@@ -75,13 +75,13 @@ public class ReviewService {
         List<Photo> allByReviewId = photoRepository.findAllByReviewId(reviewId);
 
         if(existsByPhoto(photos) && action.equals(Event.EventActionType.ADD))    {
-            logger.info(user.getId()+ " user.mileage++ at "+ LocalDateTime.now());
+            logger.info(user.getId()+ " user.mileage+1 at "+ LocalDateTime.now());
             user.setMileage(user.getMileage()+1);
         } else if (existsByPhoto(photos) && action.equals(Event.EventActionType.MOD) && allByReviewId.isEmpty()) { //수정시, 기존에 없던 이미지가 추가되는 경우, 마일리지 +1;
-            logger.info(user.getId()+ " user.mileage++ at "+ LocalDateTime.now());
+            logger.info(user.getId()+ " user.mileage+1 at "+ LocalDateTime.now());
             user.setMileage(user.getMileage()+1);
         } else if (action.equals(Event.EventActionType.DELETE) && allByReviewId.size() >= 1){//삭제시, 기존에 리뷰의 이미지가 1개이상인 경우, 마일리지 -1;
-            logger.info(user.getId()+ " user.mileage-- at "+ LocalDateTime.now());
+            logger.info(user.getId()+ " user.mileage-1 at "+ LocalDateTime.now());
             user.setMileage(user.getMileage()-1);
         }
     }
