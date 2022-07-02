@@ -18,20 +18,18 @@ import java.util.UUID;
 @DynamicUpdate
 @DynamicInsert
 public class Place extends BaseTimeEntity implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id
     @Column(name = "place_id")
-    private String placeId;
+    @Type(type = "uuid-char")
+    private UUID id = UUID.randomUUID();
     @Column(length = 100)
     private String name;
-    @Lob
     @Column
     private String description;
     @Column(length = 90) //(세계에서 가장 긴 지명: 85자)
     private String location;
     @Column
     private PlaceType type;
-
     public enum PlaceType{
         FOOD, SIGHTSEEING, TOUR
     }

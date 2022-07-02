@@ -18,10 +18,10 @@ import java.util.UUID;
 @DynamicInsert
 @DynamicUpdate
 public class User extends BaseTimeEntity implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id
     @Column(name = "user_id")
-    private String userId;
+    @Type(type = "uuid-char")
+    private UUID id = UUID.randomUUID();
     @Column(length = 20) //우리나라 가장 긴 이름:17자
     private String username;
     @Column(length = 20)

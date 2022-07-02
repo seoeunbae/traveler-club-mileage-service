@@ -9,6 +9,8 @@ import com.triple.travelerclubmileage.model.user.exception.UserException;
 import com.triple.travelerclubmileage.model.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,16 +19,18 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Log4j2
 public class EventService {
+    private static final Logger logger = LogManager.getLogger(EventService.class);
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
 
     public EventResponse saveEvent(EventRequest request){
-        log.info("리뷰 ID : "+request.getReviewId()+" , 행위 : "+request.getAction()+" , 유저 ID : "+request.getUserId());
+        logger.info("review ID : "+request.getReviewId()+" , action : "+request.getAction()+" , user ID : "+request.getUserId());
         Event event = EventRequest.toEventEntity(request);
         event.setUser(
-                userRepository.findByUserId(request.getUserId())
+                userRepository.findById(request.getUserId())
                         .orElseThrow(UserException.UserNotExistException::new)
         );
+
         return EventResponse.toResponse(eventRepository.save(event));
     }
 

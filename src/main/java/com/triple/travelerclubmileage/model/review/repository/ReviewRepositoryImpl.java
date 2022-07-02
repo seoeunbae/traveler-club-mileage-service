@@ -1,23 +1,35 @@
 package com.triple.travelerclubmileage.model.review.repository;
 
 import com.triple.travelerclubmileage.model.common.querydsl.QueryDslSupport;
+import com.triple.travelerclubmileage.model.place.entity.QPlace;
+import com.triple.travelerclubmileage.model.review.entity.QReview;
 import com.triple.travelerclubmileage.model.review.entity.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
+import java.util.List;
+import java.util.UUID;
 
 public class ReviewRepositoryImpl extends QueryDslSupport implements ReviewRepositoryCustom {
-    private final ReviewRepository reviewRepository;
 
     @Autowired
-    public ReviewRepositoryImpl(ReviewRepository reviewRepository, EntityManager entityManager) {
+    public ReviewRepositoryImpl(EntityManager entityManager) {
         super(Review.class, entityManager);
-        this.reviewRepository = reviewRepository;
     }
 
     @Override
-    public boolean existsByPlaceId(String placeId) {
-        return false;
+    public boolean existsByPlaceId(final UUID placeId) {
+        return !queryFactory.selectFrom(QReview.review)
+                .leftJoin(QPlace.place)
+                .on(QReview.review.place.eq(QPlace.place))
+                .fetchJoin()
+                .where(
+                        QPlace.place.id.eq(placeId)
+                )
+                .limit(1)
+                .fetch()
+                .isEmpty();
+
     }
 
 }

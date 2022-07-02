@@ -19,10 +19,10 @@ import java.util.UUID;
 @DynamicUpdate
 @DynamicInsert
 public class Photo extends BaseTimeEntity implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id
     @Column(name = "photo_id")
-    private String photoId;
+    @Type(type = "uuid-char")
+    private UUID id = UUID.randomUUID();
     @Column
     private String resource;
     @Column

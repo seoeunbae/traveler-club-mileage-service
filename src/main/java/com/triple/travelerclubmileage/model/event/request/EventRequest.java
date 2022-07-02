@@ -1,5 +1,6 @@
 package com.triple.travelerclubmileage.model.event.request;
 
+import com.sun.istack.NotNull;
 import com.triple.travelerclubmileage.model.event.entity.Event;
 import com.triple.travelerclubmileage.model.review.entity.Review;
 import lombok.Builder;
@@ -8,17 +9,22 @@ import java.util.UUID;
 
 @Getter
 public class EventRequest {
+    @NotNull
     private Event.EventTargetType type;
+    @NotNull
     private Event.EventActionType action;
-    private String reviewId;
+    @NotNull
+    private UUID reviewId;
+    @NotNull
     private String content;
-    private String[] attachedPhotoIds;
-    private String userId;
-    private String placeId;
+    private UUID[] attachedPhotoIds;
+    @NotNull
+    private UUID userId;
+    @NotNull
+    private UUID placeId;
 
     public static Event toEventEntity(EventRequest request){
         Event event = new Event();
-        event.setEventId(UUID.randomUUID().toString());
         event.setEventTargetId(request.getReviewId());
         event.setEventActionType(request.getAction());
         event.setIsEnabled(true);
@@ -28,7 +34,7 @@ public class EventRequest {
 
     public static Review toReviewEntity(EventRequest request){
         Review review = new Review();
-        review.setReviewId(request.getReviewId());
+//        review.setId(request.getReviewId());
         review.setContent(request.getContent());
         review.setIsEnabled(true);
         return review;

@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 import java.util.UUID;
 @Transactional
-@Repository
-public interface ReviewRepository extends JpaRepository<Review, Long>,ReviewRepositoryCustom {
-    boolean existsByPlacePlaceId(String placeId);
-    Optional<Review> findByReviewId(String reviewId);
+public interface ReviewRepository extends JpaRepository<Review, Long>, ReviewRepositoryCustom {
+    Optional<Review> findById(UUID id);
 }

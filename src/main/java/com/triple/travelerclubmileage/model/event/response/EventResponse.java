@@ -2,20 +2,24 @@ package com.triple.travelerclubmileage.model.event.response;
 
 import com.triple.travelerclubmileage.model.event.entity.Event;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
+@Getter
+@Setter
 @Builder
 public class EventResponse {
-    private String eventId;
+    private UUID eventId;
     private Event.EventTargetType type;
     private Event.EventActionType action;
-    private String TargetId;
+    private UUID TargetId;
 
     public static EventResponse toResponse(Event event){
         return EventResponse.builder()
                 .TargetId(event.getEventTargetId())
-                .eventId(event.getEventId())
+                .eventId(event.getId())
                 .type(event.getEventTargetType())
                 .action(event.getEventActionType())
                 .build();

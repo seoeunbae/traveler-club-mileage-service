@@ -1,5 +1,6 @@
 package com.triple.travelerclubmileage.model.event.controller;
 
+import com.triple.travelerclubmileage.model.common.rest.response.RestResponse;
 import com.triple.travelerclubmileage.model.event.request.EventRequest;
 import com.triple.travelerclubmileage.model.event.response.EventResponse;
 import com.triple.travelerclubmileage.model.event.service.EventService;
@@ -8,10 +9,7 @@ import com.triple.travelerclubmileage.model.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/events")
@@ -23,25 +21,22 @@ public class EventController {
     private final ReviewService reviewService;
 
     @PostMapping
-    public ReviewResponse runEvent(
+    public RestResponse runEvent(
             @RequestBody EventRequest request
     ){
-        ReviewResponse response = null;
         eventService.saveEvent(request);
         switch (request.getAction()){
             case ADD:
-                response = reviewService.createReview(request);
-                break;
+                return reviewService.createReview(request);
             case MOD:
-                response = reviewService.updateReview(request);
-                break;
+                return reviewService.updateReview(request);
             case DELETE:
-                response = reviewService.deleteReview(request);
-                break;
+                return reviewService.deleteReview(request);
             default:
                 log.warn("request action is incorrect!");
+                throw new RuntimeException("request action is incorrect!");
         }
 
-        return response;
+//        return response;
     }
 }

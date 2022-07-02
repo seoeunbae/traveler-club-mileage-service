@@ -19,14 +19,15 @@ import java.util.UUID;
 @DynamicUpdate
 @DynamicInsert
 public class Event extends BaseTimeEntity implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id
     @Column(name = "event_id")
-    private String eventId;
+    @Type(type = "uuid-char")
+    private UUID id = UUID.randomUUID();
     @Column
     private EventTargetType eventTargetType;
     @Column
-    private String eventTargetId;
+    @Type(type = "uuid-char")
+    private UUID eventTargetId;
     @Column
     private EventActionType eventActionType;
     @Column

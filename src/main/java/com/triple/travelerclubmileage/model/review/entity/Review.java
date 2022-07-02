@@ -24,12 +24,11 @@ import java.util.UUID;
 @DynamicInsert
 @DynamicUpdate
 public class Review extends BaseTimeEntity implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id
     @Column(name = "review_id")
-    private String reviewId;
-    @Lob
-    @Column
+    @Type(type = "uuid-char")
+    private UUID id = UUID.randomUUID();
+    @Column(nullable = true, columnDefinition = "TEXT")
     private String content;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "place_id", referencedColumnName = "place_id")
@@ -42,5 +41,6 @@ public class Review extends BaseTimeEntity implements Serializable {
     @Column
     private Boolean isFirst;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "review", cascade = CascadeType.REMOVE)
+    @Column(nullable = true)
     private List<Photo> photos = new ArrayList<>();
 }
