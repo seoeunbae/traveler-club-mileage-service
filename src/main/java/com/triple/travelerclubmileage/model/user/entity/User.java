@@ -14,7 +14,8 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@Table(name = "`user`")
+@Table(name = "`user`") //H2는 PK, UUID에 대해서 인덱스가 자동생성됨.
+//indexes = {@Index(name = "idx_user", columnList = "user_id")})
 @DynamicInsert
 @DynamicUpdate
 public class User extends BaseTimeEntity implements Serializable {
@@ -24,7 +25,7 @@ public class User extends BaseTimeEntity implements Serializable {
     private UUID id = UUID.randomUUID();
     @Column(length = 20) //우리나라 가장 긴 이름:17자
     private String username;
-    @Column(length = 20)
+    @Column(length = 20, unique = true)
     private String nickname;
     @Column(length = 65)
     private String password;

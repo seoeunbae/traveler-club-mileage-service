@@ -17,7 +17,7 @@ public class UserRepositoryImpl extends QueryDslSupport implements UserRepositor
 
     @Override
     public Integer sumMileageByUserId(UUID userId) {
-        return queryFactory.select(QUser.user.mileage.sum())
+        return queryFactory.select(QUser.user.mileage)
                 .from(QUser.user)
                 .where(QUser.user.id.eq(userId))
                 .fetchOne();
