@@ -32,6 +32,7 @@ public class User extends BaseTimeEntity implements Serializable {
     @Column(length = 15)
     private String phoneNumber;
     @Column
+    @Enumerated(EnumType.STRING)
     private UserRole role;
     @Column
     private Integer mileage;

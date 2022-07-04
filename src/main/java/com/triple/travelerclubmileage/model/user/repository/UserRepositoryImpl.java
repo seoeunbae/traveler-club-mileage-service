@@ -6,6 +6,7 @@ import com.triple.travelerclubmileage.model.user.entity.User;
 
 import javax.persistence.EntityManager;
 import java.sql.Timestamp;
+import java.util.Optional;
 import java.util.UUID;
 
 public class UserRepositoryImpl extends QueryDslSupport implements UserRepositoryCustom {
@@ -16,10 +17,10 @@ public class UserRepositoryImpl extends QueryDslSupport implements UserRepositor
 
 
     @Override
-    public Integer sumMileageByUserId(UUID userId) {
-        return queryFactory.select(QUser.user.mileage)
+    public Optional<Integer> findMileageByUserId(UUID userId) {
+        return Optional.ofNullable(queryFactory.select(QUser.user.mileage)
                 .from(QUser.user)
                 .where(QUser.user.id.eq(userId))
-                .fetchOne();
+                .fetchFirst());
     }
 }
