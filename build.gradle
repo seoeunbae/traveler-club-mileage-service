@@ -22,7 +22,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'mysql:mysql-connector-java'
+	implementation 'com.h2database:h2:2.1.214' // H2에서 UUID에 인덱스가 자동 생성됨. Mysql은 UUID 타입을 지원하지 않고, 컨버팅함수만 존재.
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
