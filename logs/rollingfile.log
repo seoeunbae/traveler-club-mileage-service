@@ -1,5 +1,0 @@
-[INFO ] 2022-07-04 10:21:01.887 [SpringApplicationShutdownHook] LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-[TRACE] 2022-07-04 10:21:01.895 [SpringApplicationShutdownHook] TypeConfiguration$Scope - Handling #sessionFactoryClosed from [org.hibernate.internal.SessionFactoryImpl@1ab28416] for TypeConfiguration
-[DEBUG] 2022-07-04 10:21:01.896 [SpringApplicationShutdownHook] TypeConfiguration$Scope - Un-scoping TypeConfiguration [org.hibernate.type.spi.TypeConfiguration$Scope@24aaa070] from SessionFactory [org.hibernate.internal.SessionFactoryImpl@1ab28416]
-[INFO ] 2022-07-04 10:21:01.900 [SpringApplicationShutdownHook] HikariDataSource - HikariPool-1 - Shutdown initiated...
-[INFO ] 2022-07-04 10:21:01.915 [SpringApplicationShutdownHook] HikariDataSource - HikariPool-1 - Shutdown completed.
