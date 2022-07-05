@@ -1,11 +1,11 @@
 package com.triple.travelerclubmileage.mock;
 
-import com.triple.travelerclubmileage.domain.event.entity.Event;
-import com.triple.travelerclubmileage.domain.event.repository.EventRepository;
-import com.triple.travelerclubmileage.domain.event.request.EventRequest;
-import com.triple.travelerclubmileage.domain.event.service.EventService;
-import com.triple.travelerclubmileage.domain.user.entity.User;
-import com.triple.travelerclubmileage.domain.user.repository.UserRepository;
+import com.triple.travelerclubmileage.tripler.domain.event.entity.Event;
+import com.triple.travelerclubmileage.tripler.domain.event.repository.EventRepository;
+import com.triple.travelerclubmileage.tripler.domain.event.request.EventRequest;
+import com.triple.travelerclubmileage.tripler.domain.event.service.EventService;
+import com.triple.travelerclubmileage.tripler.domain.user.entity.User;
+import com.triple.travelerclubmileage.tripler.domain.user.repository.UserRepository;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

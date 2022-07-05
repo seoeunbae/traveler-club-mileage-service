@@ -1,10 +1,10 @@
 package com.triple.travelerclubmileage.domain.user;
 
-import com.triple.travelerclubmileage.domain.common.rest.response.RestSuccessResponse;
+import com.triple.travelerclubmileage.tripler.domain.common.rest.response.RestSuccessResponse;
 import com.triple.travelerclubmileage.mock.UserServiceBase;
-import com.triple.travelerclubmileage.domain.user.entity.User;
-import com.triple.travelerclubmileage.domain.user.exception.UserException;
-import com.triple.travelerclubmileage.domain.user.response.UserMileageResponse;
+import com.triple.travelerclubmileage.tripler.domain.user.entity.User;
+import com.triple.travelerclubmileage.tripler.domain.user.exception.UserException;
+import com.triple.travelerclubmileage.tripler.domain.user.response.UserMileageResponse;
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;

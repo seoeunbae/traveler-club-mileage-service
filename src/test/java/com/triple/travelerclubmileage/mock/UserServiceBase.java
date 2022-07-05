@@ -1,8 +1,8 @@
 package com.triple.travelerclubmileage.mock;
 
-import com.triple.travelerclubmileage.domain.user.entity.User;
-import com.triple.travelerclubmileage.domain.user.repository.UserRepository;
-import com.triple.travelerclubmileage.domain.user.service.UserService;
+import com.triple.travelerclubmileage.tripler.domain.user.entity.User;
+import com.triple.travelerclubmileage.tripler.domain.user.repository.UserRepository;
+import com.triple.travelerclubmileage.tripler.domain.user.service.UserService;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
