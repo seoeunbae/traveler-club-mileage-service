@@ -34,7 +34,9 @@ public class EventService {
 
         Event event = EventRequest.toEventEntity(request);
         event.setUser( user );
-        return EventResponse.toResponse(eventRepository.save(event));
+        eventRepository.save(event);
+        
+        return EventResponse.toResponse(event);
     }
 
     private void checkDuplicatedEvent(EventRequest request, User user){

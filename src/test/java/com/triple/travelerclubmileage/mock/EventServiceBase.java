@@ -37,6 +37,7 @@ public class EventServiceBase {
         event.setEventTargetId(reviewId);
         event.setEventTargetType(type);
         event.setEventActionType(action);
+        event.setContent("test_event_content");
         event.setIsEnabled(true);
         return event;
     }

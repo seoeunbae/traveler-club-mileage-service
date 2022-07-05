@@ -2,13 +2,16 @@ package com.triple.travelerclubmileage.model.event;
 
 import com.triple.travelerclubmileage.mock.EventServiceBase;
 import com.triple.travelerclubmileage.model.event.entity.Event;
+import com.triple.travelerclubmileage.model.event.exception.EventException;
 import com.triple.travelerclubmileage.model.event.repository.EventRepository;
 import com.triple.travelerclubmileage.model.event.request.EventRequest;
 import com.triple.travelerclubmileage.model.event.response.EventResponse;
 import com.triple.travelerclubmileage.model.event.service.EventService;
 import com.triple.travelerclubmileage.model.user.entity.User;
+import com.triple.travelerclubmileage.model.user.exception.UserException;
 import com.triple.travelerclubmileage.model.user.repository.UserRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
@@ -20,6 +23,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 import java.util.UUID;
+
+import static org.junit.Assert.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 public class saveEventTest extends EventServiceBase {
@@ -51,29 +56,31 @@ public class saveEventTest extends EventServiceBase {
 
     }
 
-//    @Test
-//    @DisplayName("발생한 이벤트 저장 - 실패 : 존재하지 않는 유저")
-//    void saveEventFailWithNoUser(){
-//
-//    }
-//
-//    @Test
-//    @DisplayName("발생한 이벤트 저장 - 실패 : 지정되지 않은 행위")
-//    void saveEventFailWithNoAction(){
-//
-//    }
+    @Test
+    @DisplayName("발생한 이벤트 저장 - 실패 : 존재하지 않는 유저")
+    public void saveEventFailWithNoUser(){
+        Event mockEvent = createMockEvent();
+        EventRequest mockEventRequest = createMockEventRequest();
 
-//    @Test
-//    @DisplayName("발생한 이벤트 저장 - 실패 : 존재하지 않는 리뷰")
-//    public void saveEventFailWithNoReview(){
-//
-//    }
-//
-//    @Test
-//    @DisplayName("발생한 이벤트 저장 - 실패 : 존재하지 않는 장소")
-//    public void saveEventFailWithNoPlace(){
-//
-//
-//    }
+        UserException.UserNotExistException thrown = Assert.assertThrows(UserException.UserNotExistException.class, () -> eventService.saveEvent(mockEventRequest));
+
+        assertEquals("해당 유저가 존재하지 않습니다.", thrown.getMessage());
+    }
+
+    @Test
+    @DisplayName("발생한 이벤트 저장 - 실패 : 중복된 이벤트")
+    public void saveEventFailWithNoAction(){
+        User mockUser = createMockUser();
+        Event mockEvent = createMockEvent();
+        EventRequest mockEventRequest1 = createMockEventRequest();
+        EventRequest mockEventRequest2 = createMockEventRequest();
+
+        Mockito.doReturn(Optional.ofNullable(mockUser)).when(userRepository).findById(Mockito.any(UUID.class));
+        Mockito.doReturn(Optional.ofNullable(mockEvent)).when(eventRepository).findByUserAndContentAndEventTargetId(mockUser, mockEventRequest1.getContent(), mockEventRequest1.getReviewId());
+
+        EventException.EventDuplicatedException thrown = Assert.assertThrows(EventException.EventDuplicatedException.class, () -> eventService.saveEvent(mockEventRequest2));
+
+        assertEquals("동일한 이벤트가 이미 반영되었습니다.", thrown.getMessage());
+    }
 
 }
