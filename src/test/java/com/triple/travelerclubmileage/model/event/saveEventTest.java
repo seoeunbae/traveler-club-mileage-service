@@ -1,31 +1,79 @@
 package com.triple.travelerclubmileage.model.event;
 
+import com.triple.travelerclubmileage.mock.EventServiceBase;
 import com.triple.travelerclubmileage.model.event.entity.Event;
 import com.triple.travelerclubmileage.model.event.repository.EventRepository;
+import com.triple.travelerclubmileage.model.event.request.EventRequest;
+import com.triple.travelerclubmileage.model.event.response.EventResponse;
 import com.triple.travelerclubmileage.model.event.service.EventService;
+import com.triple.travelerclubmileage.model.user.entity.User;
+import com.triple.travelerclubmileage.model.user.repository.UserRepository;
+import org.assertj.core.api.Assertions;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @ExtendWith(MockitoExtension.class)
-public class saveEventTest {
-    @Mock
-    private EventRepository eventRepository;
-    @InjectMocks
-    private EventService eventService;
+public class saveEventTest extends EventServiceBase {
+    @AfterEach
+    void tearDown(){
+        eventRepository.deleteAll();
+        userRepository.deleteAll();
+    }
+    @Before
+    public void openMocks(){
+        MockitoAnnotations.openMocks(this);
 
-//    final UUID eventId = UUID.randomUUID();
-//    final UUID userId = UUID.fromString("3ede0ef2-92b7-4817-a5f3-0c575361f745");
-//    final UUID reviewId = UUID.fromString("240a0658-dc5f-4878-9381-ebb7b2667772");
+    }
+    @Test
+    @DisplayName("발생한 이벤트 저장 - 성공")
+    public void saveEventSuccess(){
+        User mockUser = createMockUser();
+        Event mockEvent = createMockEvent();
+        EventRequest mockEventRequest = createMockEventRequest();
+
+        Mockito.doReturn(Optional.ofNullable(mockUser)).when(userRepository).findById(Mockito.any(UUID.class));
+
+        final EventResponse result = eventService.saveEvent(mockEventRequest);
+
+        Assertions.assertThat(result.getEventId()).isExactlyInstanceOf(UUID.class);
+        Assertions.assertThat(result.getAction()).isEqualTo(action);
+        Assertions.assertThat(result.getType()).isEqualTo(type);
+        Assertions.assertThat(result.getTargetId()).isEqualTo(reviewId);
+
+    }
+
+//    @Test
+//    @DisplayName("발생한 이벤트 저장 - 실패 : 존재하지 않는 유저")
+//    void saveEventFailWithNoUser(){
 //
-//    public Event createMockEvent(){
-//        Event event = new Event();
-//        event.setUser();
-//        event.setEventTargetId();
-//        event.setEventActionType();
-//        return event;
 //    }
+//
+//    @Test
+//    @DisplayName("발생한 이벤트 저장 - 실패 : 지정되지 않은 행위")
+//    void saveEventFailWithNoAction(){
+//
+//    }
+
+//    @Test
+//    @DisplayName("발생한 이벤트 저장 - 실패 : 존재하지 않는 리뷰")
+//    public void saveEventFailWithNoReview(){
+//
+//    }
+//
+//    @Test
+//    @DisplayName("발생한 이벤트 저장 - 실패 : 존재하지 않는 장소")
+//    public void saveEventFailWithNoPlace(){
+//
+//
+//    }
+
 }

@@ -5,9 +5,12 @@ import com.triple.travelerclubmileage.model.event.entity.Event;
 import com.triple.travelerclubmileage.model.review.entity.Review;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
+
 import java.util.UUID;
 
 @Getter
+@Setter
 public class EventRequest {
     @NotNull
     private Event.EventTargetType type;
@@ -29,12 +32,13 @@ public class EventRequest {
         event.setEventActionType(request.getAction());
         event.setIsEnabled(true);
         event.setEventTargetType(request.getType());
+        event.setContent(request.getContent());
         return event;
     }
 
     public static Review toReviewEntity(EventRequest request){
         Review review = new Review();
-//        review.setId(request.getReviewId());
+        review.setId(request.getReviewId());
         review.setContent(request.getContent());
         review.setIsEnabled(true);
         return review;

@@ -29,6 +29,7 @@ public class Place extends BaseTimeEntity implements Serializable {
     @Column(length = 90) //(세계에서 가장 긴 지명: 85자)
     private String location;
     @Column
+    @Enumerated(EnumType.STRING)
     private PlaceType type;
     public enum PlaceType{
         FOOD, SIGHTSEEING, TOUR

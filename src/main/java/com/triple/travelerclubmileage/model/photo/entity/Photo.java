@@ -26,6 +26,7 @@ public class Photo extends BaseTimeEntity implements Serializable {
     @Column
     private String resource;
     @Column
+    @Enumerated(EnumType.STRING)
     private PhotoType type;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "review_id", referencedColumnName = "review_id")

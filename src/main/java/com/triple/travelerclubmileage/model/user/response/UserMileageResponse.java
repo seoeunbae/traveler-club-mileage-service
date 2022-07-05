@@ -13,12 +13,4 @@ import java.util.UUID;
 public class UserMileageResponse {
     private UUID userId;
     private Integer mileage;
-//    public static UserMileageResponse toResponse(Integer mileage){
-//        return UserMileageResponse.builder()
-//                .userId()
-//                .mileage(user.getMileage())
-//                .build();
-//    }
-
-
 }
