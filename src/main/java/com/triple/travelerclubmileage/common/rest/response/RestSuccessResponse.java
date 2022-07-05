@@ -1,4 +1,4 @@
-package com.triple.travelerclubmileage.tripler.domain.common.rest.response;
+package com.triple.travelerclubmileage.common.rest.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

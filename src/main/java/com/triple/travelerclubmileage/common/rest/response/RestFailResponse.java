@@ -1,4 +1,4 @@
-package com.triple.travelerclubmileage.tripler.domain.common.rest.response;
+package com.triple.travelerclubmileage.common.rest.response;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

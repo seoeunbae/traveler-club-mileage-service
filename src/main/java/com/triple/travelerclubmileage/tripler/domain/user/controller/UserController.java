@@ -1,6 +1,6 @@
 package com.triple.travelerclubmileage.tripler.domain.user.controller;
 
-import com.triple.travelerclubmileage.tripler.domain.common.rest.response.RestResponse;
+import com.triple.travelerclubmileage.common.rest.response.RestResponse;
 import com.triple.travelerclubmileage.tripler.domain.user.response.UserMileageResponse;
 import com.triple.travelerclubmileage.tripler.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;

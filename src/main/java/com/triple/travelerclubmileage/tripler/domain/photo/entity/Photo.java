@@ -1,6 +1,6 @@
 package com.triple.travelerclubmileage.tripler.domain.photo.entity;
 
-import com.triple.travelerclubmileage.tripler.domain.common.time.entity.BaseTimeEntity;
+import com.triple.travelerclubmileage.common.time.entity.BaseTimeEntity;
 import com.triple.travelerclubmileage.tripler.domain.review.entity.Review;
 import lombok.Getter;
 import lombok.Setter;

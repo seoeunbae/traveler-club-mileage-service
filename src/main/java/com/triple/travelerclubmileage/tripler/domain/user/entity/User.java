@@ -1,6 +1,6 @@
 package com.triple.travelerclubmileage.tripler.domain.user.entity;
 
-import com.triple.travelerclubmileage.tripler.domain.common.time.entity.BaseTimeEntity;
+import com.triple.travelerclubmileage.common.time.entity.BaseTimeEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;

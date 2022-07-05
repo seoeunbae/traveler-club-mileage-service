@@ -1,4 +1,4 @@
-package com.triple.travelerclubmileage.tripler.domain.common.querydsl;
+package com.triple.travelerclubmileage.common.querydsl;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
