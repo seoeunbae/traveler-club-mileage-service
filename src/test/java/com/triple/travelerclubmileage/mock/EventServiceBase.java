@@ -1,15 +1,14 @@
 package com.triple.travelerclubmileage.mock;
 
-import com.triple.travelerclubmileage.model.event.entity.Event;
-import com.triple.travelerclubmileage.model.event.repository.EventRepository;
-import com.triple.travelerclubmileage.model.event.request.EventRequest;
-import com.triple.travelerclubmileage.model.event.service.EventService;
-import com.triple.travelerclubmileage.model.user.entity.User;
-import com.triple.travelerclubmileage.model.user.repository.UserRepository;
+import com.triple.travelerclubmileage.domain.event.entity.Event;
+import com.triple.travelerclubmileage.domain.event.repository.EventRepository;
+import com.triple.travelerclubmileage.domain.event.request.EventRequest;
+import com.triple.travelerclubmileage.domain.event.service.EventService;
+import com.triple.travelerclubmileage.domain.user.entity.User;
+import com.triple.travelerclubmileage.domain.user.repository.UserRepository;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
@@ -30,10 +29,10 @@ public class EventServiceBase {
     final UUID placeId = UUID.fromString("2e4baf1c-5acb-4efb-a1af-eddada31b00f");
     final Integer initialMileage = 0;
     final UUID[] attachedPhotoIds = {UUID.fromString("e4d1a64e-a531-46de-88d0-ff0ed70c0bb9"), UUID.fromString("afb0cef2-851d-4a50-bb07-9cc15cbdc331")};
-    public Event createMockEvent(){
+    public Event createEvent(){
         Event event = new Event();
         event.setId(eventId);
-        event.setUser(createMockUser());
+        event.setUser(createUser());
         event.setEventTargetId(reviewId);
         event.setEventTargetType(type);
         event.setEventActionType(action);
@@ -42,7 +41,7 @@ public class EventServiceBase {
         return event;
     }
 
-    public User createMockUser(){
+    public User createUser(){
         User user = new User();
         user.setId(userId);
         user.setMileage(initialMileage);
@@ -54,7 +53,7 @@ public class EventServiceBase {
         return user;
     }
 
-    public EventRequest createMockEventRequest(){
+    public EventRequest createEventRequest(){
         EventRequest request = new EventRequest();
         request.setUserId(userId);
         request.setContent("test_event_content");

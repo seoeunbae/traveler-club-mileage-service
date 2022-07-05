@@ -1,8 +1,8 @@
 package com.triple.travelerclubmileage.mock;
 
-import com.triple.travelerclubmileage.model.user.entity.User;
-import com.triple.travelerclubmileage.model.user.repository.UserRepository;
-import com.triple.travelerclubmileage.model.user.service.UserService;
+import com.triple.travelerclubmileage.domain.user.entity.User;
+import com.triple.travelerclubmileage.domain.user.repository.UserRepository;
+import com.triple.travelerclubmileage.domain.user.service.UserService;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -20,7 +20,7 @@ public class UserServiceBase {
     protected final UUID userId = UUID.fromString("3ede0ef2-92b7-4817-a5f3-0c575361f745");
     protected final Integer initialMileage = 0;
 
-    public User createMockUser(){
+    public User createUser(){
         User user = new User();
         user.setId(userId);
         user.setMileage(initialMileage);
@@ -31,4 +31,5 @@ public class UserServiceBase {
         user.setRole(User.UserRole.USER_ROLE);
         return user;
     }
+
 }
