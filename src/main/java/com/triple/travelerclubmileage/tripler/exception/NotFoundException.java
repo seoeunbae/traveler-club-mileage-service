@@ -23,4 +23,10 @@ public class NotFoundException extends RuntimeException {
         }
     }
 
+    public static class PhotoNotExistException extends NotFoundException {
+        public PhotoNotExistException() {
+            super("해당 사진이 존재하지 않습니다.");
+        }
+    }
+
 }

@@ -28,13 +28,13 @@ public class EventService {
 
         checkDuplicatedEvent(request, user);
 
-        log.info("review ID : "+request.getReviewId()+" , action : "+request.getAction()+" , user ID : "+request.getUserId());
+        log.info("[saveEvent()] review ID : "+request.getReviewId()+" , action : "+request.getAction()+" , user ID : "+request.getUserId());
 
         Event event = EventRequest.toEventEntity(request);
         event.setUser( user );
-        eventRepository.save(event);
 
-        return EventResponse.toResponse(event);
+
+        return EventResponse.toResponse(eventRepository.save(event));
     }
 
     private void checkDuplicatedEvent(EventRequest request, User user){

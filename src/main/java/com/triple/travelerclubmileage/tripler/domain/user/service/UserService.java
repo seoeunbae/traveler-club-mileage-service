@@ -1,6 +1,6 @@
 package com.triple.travelerclubmileage.tripler.domain.user.service;
 
-import com.triple.travelerclubmileage.common.rest.response.RestSuccessResponse;
+import com.triple.travelerclubmileage.tripler.common.rest.response.RestSuccessResponse;
 import com.triple.travelerclubmileage.tripler.domain.user.repository.UserRepository;
 import com.triple.travelerclubmileage.tripler.domain.user.response.UserMileageResponse;
 import com.triple.travelerclubmileage.tripler.exception.NotFoundException;

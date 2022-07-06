@@ -1,6 +1,7 @@
 package com.triple.travelerclubmileage.tripler.domain.review.entity;
 
-import com.triple.travelerclubmileage.common.time.entity.BaseTimeEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.triple.travelerclubmileage.tripler.common.time.entity.BaseTimeEntity;
 import com.triple.travelerclubmileage.tripler.domain.photo.entity.Photo;
 import com.triple.travelerclubmileage.tripler.domain.place.entity.Place;
 import com.triple.travelerclubmileage.tripler.domain.user.entity.User;
@@ -42,5 +43,6 @@ public class Review extends BaseTimeEntity implements Serializable {
     private Boolean isFirst;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "review", cascade = CascadeType.REMOVE)
     @Column(nullable = true)
+    @JsonManagedReference
     private List<Photo> photos = new ArrayList<>();
 }

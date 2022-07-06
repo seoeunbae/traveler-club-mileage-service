@@ -1,10 +1,10 @@
 package com.triple.travelerclubmileage.domain.user;
 
-import com.triple.travelerclubmileage.common.rest.response.RestSuccessResponse;
+import com.triple.travelerclubmileage.tripler.common.rest.response.RestSuccessResponse;
 import com.triple.travelerclubmileage.mock.UserServiceBase;
 import com.triple.travelerclubmileage.tripler.domain.user.entity.User;
-import com.triple.travelerclubmileage.tripler.domain.user.exception.UserException;
 import com.triple.travelerclubmileage.tripler.domain.user.response.UserMileageResponse;
+import com.triple.travelerclubmileage.tripler.exception.NotFoundException;
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
@@ -43,8 +43,8 @@ public class GetUserMileageTest extends UserServiceBase {
     @Test
     @DisplayName("유저의 마일리지 조회 - 실패 : 존재하지 않는 유저")
     void getUserMileageFailWithNoUser(){
-        UserException.UserNotExistException thrown = Assert
-                .assertThrows(UserException.UserNotExistException.class, () -> userService.getUserMileage(userId));
+        NotFoundException.UserNotExistException thrown = Assert
+                .assertThrows(NotFoundException.UserNotExistException.class, () -> userService.getUserMileage(userId));
 
         assertEquals("해당 유저가 존재하지 않습니다.", thrown.getMessage());
     }

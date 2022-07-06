@@ -1,6 +1,6 @@
 package com.triple.travelerclubmileage.tripler.domain.event.controller;
 
-import com.triple.travelerclubmileage.common.rest.response.RestResponse;
+import com.triple.travelerclubmileage.tripler.common.rest.response.RestResponse;
 import com.triple.travelerclubmileage.tripler.domain.event.request.EventRequest;
 import com.triple.travelerclubmileage.tripler.domain.event.service.EventService;
 import com.triple.travelerclubmileage.tripler.domain.review.service.ReviewService;

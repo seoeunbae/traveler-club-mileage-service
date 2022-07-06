@@ -96,9 +96,14 @@ public class MileageEventProcessImpl implements MileageEventProcessor {
         return !reviewRepository.existsByPlaceId(placeId);
     }
     private boolean existsByContent(final String content){
+        if( content == null){
+            return false;
+        }
         return content.length() >= 1;
     }
     private boolean existsByPhoto(final UUID[] photos){
-        return photos.length >= 1;
+        if( photos == null){
+            return false;
+        } else return photos.length >= 1;
     }
 }

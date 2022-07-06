@@ -1,4 +1,4 @@
-package com.triple.travelerclubmileage.common.time.entity;
+package com.triple.travelerclubmileage.tripler.common.time.entity;
 
 import lombok.Getter;
 import org.hibernate.annotations.CreationTimestamp;

@@ -1,6 +1,6 @@
 package com.triple.travelerclubmileage.tripler.domain.user.repository;
 
-import com.triple.travelerclubmileage.common.querydsl.QueryDslSupport;
+import com.triple.travelerclubmileage.tripler.common.querydsl.QueryDslSupport;
 import com.triple.travelerclubmileage.domain.user.entity.QUser;
 import com.triple.travelerclubmileage.tripler.domain.user.entity.User;
 

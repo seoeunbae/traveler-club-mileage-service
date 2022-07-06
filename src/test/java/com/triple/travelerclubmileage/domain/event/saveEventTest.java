@@ -38,6 +38,7 @@ public class saveEventTest extends EventServiceBase {
     @DisplayName("발생한 이벤트 저장 - 성공")
     public void saveEventSuccess(){
         Mockito.doReturn(Optional.ofNullable(createUser())).when(userRepository).findById(Mockito.any(UUID.class));
+        Mockito.doReturn(createEvent()).when(eventRepository).save(Mockito.any(Event.class));
 
         final EventResponse result = eventService.saveEvent(createEventRequest());
 

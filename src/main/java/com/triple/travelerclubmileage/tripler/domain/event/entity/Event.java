@@ -1,6 +1,6 @@
 package com.triple.travelerclubmileage.tripler.domain.event.entity;
 
-import com.triple.travelerclubmileage.common.time.entity.BaseTimeEntity;
+import com.triple.travelerclubmileage.tripler.common.time.entity.BaseTimeEntity;
 import com.triple.travelerclubmileage.tripler.domain.user.entity.User;
 import lombok.Getter;
 import lombok.Setter;

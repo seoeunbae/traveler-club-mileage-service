@@ -7,6 +7,8 @@ import com.triple.travelerclubmileage.tripler.domain.photo.repository.PhotoRepos
 import com.triple.travelerclubmileage.tripler.domain.place.entity.Place;
 import com.triple.travelerclubmileage.tripler.domain.place.repository.PlaceRepository;
 import com.triple.travelerclubmileage.tripler.domain.review.entity.Review;
+import com.triple.travelerclubmileage.tripler.domain.review.listener.MileageEventProcessImpl;
+import com.triple.travelerclubmileage.tripler.domain.review.listener.MileageEventProcessor;
 import com.triple.travelerclubmileage.tripler.domain.review.listener.MileageListener;
 import com.triple.travelerclubmileage.tripler.domain.review.repository.ReviewRepository;
 import com.triple.travelerclubmileage.tripler.domain.review.service.ReviewService;
@@ -15,8 +17,14 @@ import com.triple.travelerclubmileage.tripler.domain.user.repository.UserReposit
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,17 +40,22 @@ public class ReviewServiceBase {
     protected PlaceRepository placeRepository;
     @Mock
     protected PhotoRepository photoRepository;
-    @Mock
-    protected MileageListener listener;
+
+    protected MileageEventProcessImpl processor = new MileageEventProcessImpl(reviewRepository, photoRepository);
+    @InjectMocks
+    @Spy
+    protected MileageListener listener = new MileageListener(processor);
     @InjectMocks
     protected ReviewService reviewService;
     protected final UUID eventId = UUID.randomUUID();
     protected final UUID userId = UUID.fromString("3ede0ef2-92b7-4817-a5f3-0c575361f745");
     protected final UUID reviewId = UUID.fromString("240a0658-dc5f-4878-9381-ebb7b2667772");
+    protected final UUID photoId1 = UUID.fromString("e4d1a64e-a531-46de-88d0-ff0ed70c0bb9");
+    protected final UUID photoId2 = UUID.fromString("afb0cef2-851d-4a50-bb07-9cc15cbdc331");
     protected final Event.EventActionType action = Event.EventActionType.ADD;
     protected final Event.EventTargetType eventType = Event.EventTargetType.REVIEW;
     protected final Place.PlaceType placeType = Place.PlaceType.FOOD;
-    final UUID placeId = UUID.fromString("2e4baf1c-5acb-4efb-a1af-eddada31b00f");
+    protected final UUID placeId = UUID.fromString("2e4baf1c-5acb-4efb-a1af-eddada31b00f");
     final Integer initialMileage = 0;
     final UUID[] attachedPhotoIds = {UUID.fromString("e4d1a64e-a531-46de-88d0-ff0ed70c0bb9"), UUID.fromString("afb0cef2-851d-4a50-bb07-9cc15cbdc331")};
 
@@ -126,5 +139,22 @@ public class ReviewServiceBase {
             photos.add(photo);
         });
         return photos;
+    }
+
+    public Photo createPhoto1(){
+        Photo photo = new Photo();
+        photo.setReview(createFirstReview());
+        photo.setResource("test_photo_dataurl1");
+        photo.setIsEnabled(true);
+        photo.setType(Photo.PhotoType.REVIEW);
+        return photo;
+    }
+    public Photo createPhoto2(){
+        Photo photo = new Photo();
+        photo.setReview(createFirstReview());
+        photo.setResource("test_photo_dataurl2");
+        photo.setIsEnabled(true);
+        photo.setType(Photo.PhotoType.REVIEW);
+        return photo;
     }
 }

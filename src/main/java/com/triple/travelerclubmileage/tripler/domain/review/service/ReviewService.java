@@ -1,8 +1,8 @@
 package com.triple.travelerclubmileage.tripler.domain.review.service;
 
 import com.triple.travelerclubmileage.tripler.domain.review.response.ReviewResponse;
-import com.triple.travelerclubmileage.common.rest.response.RestResponse;
-import com.triple.travelerclubmileage.common.rest.response.RestSuccessResponse;
+import com.triple.travelerclubmileage.tripler.common.rest.response.RestResponse;
+import com.triple.travelerclubmileage.tripler.common.rest.response.RestSuccessResponse;
 import com.triple.travelerclubmileage.tripler.domain.event.request.EventRequest;
 import com.triple.travelerclubmileage.tripler.domain.photo.entity.Photo;
 import com.triple.travelerclubmileage.tripler.domain.photo.repository.PhotoRepository;
@@ -30,7 +30,7 @@ public class ReviewService {
     private final PhotoRepository photoRepository;
     private final MileageListener listener;
 
-    public RestResponse<ReviewResponse> createReview(
+    public RestSuccessResponse<ReviewResponse> createReview(
             final EventRequest request
     ){
          User user = userRepository.findById(request.getUserId())
@@ -44,16 +44,13 @@ public class ReviewService {
         Review savedReview = reviewRepository.save(review);
 
         listener.changeMileage(savedReview, request, user);
-
-        Arrays.stream(request.getAttachedPhotoIds()).forEach(photoId -> {
-            Photo photo = new Photo();
-            photo.setId(photoId);
-            photo.setReview(savedReview);
-            photo.setIsEnabled(true);
-            photo.setType(Photo.PhotoType.REVIEW);
-            photoRepository.save(photo);
-        }); //photo리스트에 있는 사진들을 저장.
-
+        if (validateAttachedPhotos(request.getAttachedPhotoIds())) {
+            List<Photo> photos = new ArrayList<>();
+            for (UUID photoId : request.getAttachedPhotoIds()) {
+                photos.add(photoRepository.findById(photoId).orElseThrow(NotFoundException.PhotoNotExistException::new));
+            }
+            review.setPhotos(photos);
+        }
         return RestSuccessResponse.newInstance(ReviewResponse.toResponse(savedReview));
 
     }
@@ -68,14 +65,14 @@ public class ReviewService {
                 .orElseThrow(NotFoundException.ReviewNotExistException::new);
 
         listener.changeMileage(review, request, user);
-
-        List<Photo> photos = new ArrayList<>();
-        for(UUID photoId :request.getAttachedPhotoIds()){
-            photos.add(photoRepository.findById(photoId).orElseThrow());
+        if(validateAttachedPhotos(request.getAttachedPhotoIds())) {
+            List<Photo> photos = new ArrayList<>();
+            for (UUID photoId : request.getAttachedPhotoIds()) {
+                photos.add(photoRepository.findById(photoId).orElseThrow(NotFoundException.PhotoNotExistException::new));
+            }
+            review.setContent(request.getContent());
+            review.setPhotos(photos);
         }
-
-        review.setContent(request.getContent());
-        review.setPhotos(photos);
         return RestSuccessResponse.newInstance(ReviewResponse.toResponse(review));
     }
 
@@ -91,5 +88,11 @@ public class ReviewService {
 
         listener.changeMileage(review, request, user);
         return null;
+    }
+
+    private boolean validateAttachedPhotos(UUID[] photos){
+        if( photos != null && photos.length >= 1){
+            return true;
+        } else return false;
     }
 }

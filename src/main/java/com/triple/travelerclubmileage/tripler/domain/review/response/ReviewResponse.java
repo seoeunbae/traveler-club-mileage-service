@@ -5,19 +5,23 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @Builder
 public class ReviewResponse {
-    private String reviewId;
-    private String userId;
-    private String placeId;
+    private UUID reviewId;
+    private UUID userId;
+    private UUID placeId;
+    private int mileage;
 
     public static ReviewResponse toResponse(Review review){
         return ReviewResponse.builder()
-                .reviewId(review.getId().toString())
-                .userId(review.getUser().getId().toString())
-                .placeId(review.getPlace().getId().toString())
+                .reviewId(review.getId())
+                .userId(review.getUser().getId())
+                .placeId(review.getPlace().getId())
+                .mileage(review.getUser().getMileage())
                 .build();
     }
 }

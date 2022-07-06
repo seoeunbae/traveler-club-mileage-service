@@ -1,4 +1,4 @@
-package com.triple.travelerclubmileage.common.rest.response;
+package com.triple.travelerclubmileage.tripler.common.rest.response;
 
 import lombok.Getter;
 

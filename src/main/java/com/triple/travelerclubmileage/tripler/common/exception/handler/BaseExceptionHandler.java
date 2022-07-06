@@ -1,6 +1,6 @@
-package com.triple.travelerclubmileage.common.exception.handler;
+package com.triple.travelerclubmileage.tripler.common.exception.handler;
 
-import com.triple.travelerclubmileage.common.rest.response.RestFailResponse;
+import com.triple.travelerclubmileage.tripler.common.rest.response.RestFailResponse;
 import com.triple.travelerclubmileage.tripler.exception.DuplicatedException;
 import com.triple.travelerclubmileage.tripler.exception.NotFoundException;
 import org.springframework.http.HttpStatus;

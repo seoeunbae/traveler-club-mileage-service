@@ -1,6 +1,7 @@
 package com.triple.travelerclubmileage.tripler.domain.photo.entity;
 
-import com.triple.travelerclubmileage.common.time.entity.BaseTimeEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.triple.travelerclubmileage.tripler.common.time.entity.BaseTimeEntity;
 import com.triple.travelerclubmileage.tripler.domain.review.entity.Review;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +31,7 @@ public class Photo extends BaseTimeEntity implements Serializable {
     private PhotoType type;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "review_id", referencedColumnName = "review_id")
+    @JsonManagedReference
     private Review review;
     @Column
     private Boolean isEnabled;
