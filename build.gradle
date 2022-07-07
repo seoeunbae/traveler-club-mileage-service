@@ -14,7 +14,7 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 	all {
-		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging' //Log4j
 	}
 }
 
@@ -26,8 +26,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
-	implementation 'com.querydsl:querydsl-jpa:5.0.0'
-	implementation 'com.querydsl:querydsl-apt:5.0.0'
+	implementation group: 'com.querydsl', name: 'querydsl-jpa', version: '5.0.0'
+	implementation  group: 'com.querydsl', name: 'querydsl-apt', version: '5.0.0'
 	runtimeOnly 'com.h2database:h2:2.1.214'
 	// H2에서 UUID에 인덱스가 자동 생성됨. Mysql은 UUID 타입을 지원하지 않고, 컨버팅함수만 존재.
 	annotationProcessor 'org.projectlombok:lombok'
@@ -52,14 +52,15 @@ querydsl {
 sourceSets {
 	main.java.srcDir querydslDir
 }
-compileQuerydsl{
-	options.annotationProcessorPath = configurations.querydsl
-}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
 	querydsl.extendsFrom compileClasspath
+}
+compileQuerydsl{
+	options.annotationProcessorPath = configurations.querydsl
 }
 tasks.withType(JavaCompile) {
 	options.annotationProcessorGeneratedSourcesDirectory = file(querydslDir)
