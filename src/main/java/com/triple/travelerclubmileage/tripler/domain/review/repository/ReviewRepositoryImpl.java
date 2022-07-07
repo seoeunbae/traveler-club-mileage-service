@@ -2,7 +2,7 @@ package com.triple.travelerclubmileage.tripler.domain.review.repository;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.triple.travelerclubmileage.tripler.common.querydsl.QueryDslSupport;
-import com.triple.travelerclubmileage.domain.review.entity.QReview;
+import com.triple.travelerclubmileage.tripler.domain.review.entity.QReview;
 import com.triple.travelerclubmileage.tripler.domain.review.entity.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 
