@@ -18,7 +18,7 @@ Mockito, Junit 4
    http://www.h2database.com/html/main.html
 2. run h2.sh
 3. create a 'triple' database in h2 console
-   <img width="450" alt="Screen Shot 2022-07-07 at 3 54 57 PM" src="https://user-images.githubusercontent.com/71380240/177711401-1b5cba52-ab05-4e7d-8613-918d0156b8d6.png">
+<img width="450" alt="Screen Shot 2022-07-07 at 3 54 57 PM" src="https://user-images.githubusercontent.com/71380240/177711401-1b5cba52-ab05-4e7d-8613-918d0156b8d6.png">
 4. click 'Connect'
 
 # How to Run
