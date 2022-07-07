@@ -9,6 +9,8 @@ Querydsl, JPA
 H2
 <br/> 
 Mockito, Junit 4
+# Database
+<img width="739" alt="Screen Shot 2022-07-07 at 4 54 46 PM" src="https://user-images.githubusercontent.com/71380240/177721761-f3d3188e-e052-4fca-87c9-202ecd762c9e.png">
 
 ## Install H2 database before Run application
 
