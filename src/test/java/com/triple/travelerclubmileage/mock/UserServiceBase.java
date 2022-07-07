@@ -18,6 +18,7 @@ public class UserServiceBase {
     protected UserService userService;
 
     protected final UUID userId = UUID.fromString("3ede0ef2-92b7-4817-a5f3-0c575361f745");
+
     protected final Integer initialMileage = 0;
 
     public User createUser(){

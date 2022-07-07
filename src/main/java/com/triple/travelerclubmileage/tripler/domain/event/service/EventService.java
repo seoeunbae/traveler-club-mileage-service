@@ -19,7 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Log4j2
 public class EventService {
+
     private final EventRepository eventRepository;
+
     private final UserRepository userRepository;
 
     public EventResponse saveEvent(EventRequest request){

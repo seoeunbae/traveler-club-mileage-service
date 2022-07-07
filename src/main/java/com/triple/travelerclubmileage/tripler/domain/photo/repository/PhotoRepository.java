@@ -9,6 +9,8 @@ import java.util.Optional;
 import java.util.UUID;
 @Repository
 public interface PhotoRepository extends JpaRepository<Photo, Long> {
+
     List<Photo> findAllByReviewId(UUID reviewId);
+
     Optional<Photo> findById(UUID id);
 }

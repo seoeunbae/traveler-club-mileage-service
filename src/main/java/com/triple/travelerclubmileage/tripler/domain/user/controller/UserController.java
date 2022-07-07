@@ -15,6 +15,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Transactional
 public class UserController {
+
     private final UserService userService;
 
     @GetMapping("/{userId}/mileage")

@@ -8,12 +8,15 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Getter
-@Setter
 @Builder
 public class EventResponse {
+
     private UUID eventId;
+
     private Event.EventTargetType type;
+
     private Event.EventActionType action;
+
     private UUID TargetId;
 
     public static EventResponse toResponse(Event event){

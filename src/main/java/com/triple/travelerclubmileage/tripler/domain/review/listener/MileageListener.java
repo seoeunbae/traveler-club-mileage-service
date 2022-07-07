@@ -15,7 +15,9 @@ import javax.transaction.Transactional;
 @Transactional
 @Log4j2
 public class MileageListener {
+
     private final MileageEventProcessor processor;
+
     public void changeMileage(Review review, EventRequest request, User user){
         switch (request.getAction()) {
             case ADD:

@@ -18,29 +18,35 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-
 @Getter
 @Setter
 @Table(name = "review")
 @DynamicInsert
 @DynamicUpdate
-public class Review extends BaseTimeEntity implements Serializable {
+public class Review extends BaseTimeEntity {
+
     @Id
     @Column(name = "review_id")
     @Type(type = "uuid-char")
     private UUID id = UUID.randomUUID();
+
     @Column(nullable = true, columnDefinition = "TEXT")
     private String content;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "place_id", referencedColumnName = "place_id")
     private Place place;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
+
     @Column
     private Boolean isEnabled;
+
     @Column
     private Boolean isFirst;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "review", cascade = CascadeType.REMOVE)
     @Column(nullable = true)
     @JsonManagedReference

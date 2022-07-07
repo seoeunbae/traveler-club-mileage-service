@@ -20,6 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class MileageEventProcessImpl implements MileageEventProcessor {
     private final ReviewRepository reviewRepository;
+
     private final PhotoRepository photoRepository;
 
     @Override
@@ -92,6 +93,7 @@ public class MileageEventProcessImpl implements MileageEventProcessor {
     private void commitChange(User user, Integer mileage){
         user.setMileage(user.getMileage() + mileage);
     }
+
     private boolean isFirst(final UUID placeId){
         return !reviewRepository.existsByPlaceId(placeId);
     }

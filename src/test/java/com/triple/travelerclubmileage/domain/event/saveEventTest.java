@@ -37,8 +37,12 @@ public class saveEventTest extends EventServiceBase {
     @Test
     @DisplayName("발생한 이벤트 저장 - 성공")
     public void saveEventSuccess(){
-        Mockito.doReturn(Optional.ofNullable(createUser())).when(userRepository).findById(Mockito.any(UUID.class));
-        Mockito.doReturn(createEvent()).when(eventRepository).save(Mockito.any(Event.class));
+        Mockito.doReturn(Optional.ofNullable(createUser()))
+                .when(userRepository)
+                .findById(Mockito.any(UUID.class));
+        Mockito.doReturn(createEvent())
+                .when(eventRepository)
+                .save(Mockito.any(Event.class));
 
         final EventResponse result = eventService.saveEvent(createEventRequest());
 
@@ -53,7 +57,9 @@ public class saveEventTest extends EventServiceBase {
     @DisplayName("발생한 이벤트 저장 - 실패 : 존재하지 않는 유저")
     public void saveEventFailWithNoUser(){
         NotFoundException.UserNotExistException thrown = Assert
-                .assertThrows(NotFoundException.UserNotExistException.class, () -> eventService.saveEvent(createEventRequest()));
+                .assertThrows(
+                        NotFoundException.UserNotExistException.class, () -> eventService.saveEvent(createEventRequest())
+                );
 
         assertEquals("해당 유저가 존재하지 않습니다.", thrown.getMessage());
     }
@@ -65,11 +71,17 @@ public class saveEventTest extends EventServiceBase {
         Event mockEvent = createEvent();
         EventRequest mockEventRequest1 = createEventRequest();
 
-        Mockito.doReturn(Optional.ofNullable(mockUser)).when(userRepository).findById(Mockito.any(UUID.class));
-        Mockito.doReturn(Optional.ofNullable(mockEvent)).when(eventRepository).findByUserAndContentAndEventTargetId(mockUser, mockEventRequest1.getContent(), mockEventRequest1.getReviewId());
+        Mockito.doReturn(Optional.ofNullable(mockUser))
+                .when(userRepository)
+                .findById(Mockito.any(UUID.class));
+        Mockito.doReturn(Optional.ofNullable(mockEvent))
+                .when(eventRepository)
+                .findByUserAndContentAndEventTargetId(mockUser, mockEventRequest1.getContent(), mockEventRequest1.getReviewId());
 
         DuplicatedException.EventDuplicatedException thrown = Assert
-                .assertThrows(DuplicatedException.EventDuplicatedException.class, () -> eventService.saveEvent(mockEventRequest1));
+                .assertThrows(
+                        DuplicatedException.EventDuplicatedException.class, () -> eventService.saveEvent(mockEventRequest1)
+                );
 
         assertEquals("동일한 이벤트가 이미 반영되었습니다.", thrown.getMessage());
     }

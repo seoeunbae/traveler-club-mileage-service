@@ -14,13 +14,16 @@ import java.util.UUID;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class UserService {
+
     private final UserRepository userRepository;
 
     public RestSuccessResponse<UserMileageResponse> getUserMileage(UUID userId){
         Integer totalMileage = userRepository.findMileageByUserId(userId).orElseThrow(NotFoundException.UserNotExistException::new);
+
         UserMileageResponse response = new UserMileageResponse();
         response.setUserId(userId);
         response.setMileage(totalMileage);
+
         return RestSuccessResponse.newInstance(response);
 
     }

@@ -24,10 +24,15 @@ import java.util.*;
 @Transactional
 @RequiredArgsConstructor
 public class ReviewService {
+
     private final ReviewRepository reviewRepository;
+
     private final UserRepository userRepository;
+
     private final PlaceRepository placeRepository;
+
     private final PhotoRepository photoRepository;
+
     private final MileageListener listener;
 
     public RestSuccessResponse<ReviewResponse> createReview(
@@ -44,6 +49,7 @@ public class ReviewService {
         Review savedReview = reviewRepository.save(review);
 
         listener.changeMileage(savedReview, request, user);
+
         if (validateAttachedPhotos(request.getAttachedPhotoIds())) {
             List<Photo> photos = new ArrayList<>();
             for (UUID photoId : request.getAttachedPhotoIds()) {
@@ -65,6 +71,7 @@ public class ReviewService {
                 .orElseThrow(NotFoundException.ReviewNotExistException::new);
 
         listener.changeMileage(review, request, user);
+
         if(validateAttachedPhotos(request.getAttachedPhotoIds())) {
             List<Photo> photos = new ArrayList<>();
             for (UUID photoId : request.getAttachedPhotoIds()) {
@@ -73,6 +80,7 @@ public class ReviewService {
             review.setContent(request.getContent());
             review.setPhotos(photos);
         }
+
         return RestSuccessResponse.newInstance(ReviewResponse.toResponse(review));
     }
 
@@ -87,7 +95,8 @@ public class ReviewService {
         review.setIsEnabled(false);
 
         listener.changeMileage(review, request, user);
-        return null;
+
+        return RestSuccessResponse.empty();
     }
 
     private boolean validateAttachedPhotos(UUID[] photos){

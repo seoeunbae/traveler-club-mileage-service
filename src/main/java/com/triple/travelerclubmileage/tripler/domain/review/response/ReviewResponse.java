@@ -11,9 +11,13 @@ import java.util.UUID;
 @Setter
 @Builder
 public class ReviewResponse {
+
     private UUID reviewId;
+
     private UUID userId;
+
     private UUID placeId;
+
     private int mileage;
 
     public static ReviewResponse toResponse(Review review){

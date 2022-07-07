@@ -10,10 +10,12 @@ import javax.persistence.EntityManager;
 import java.util.UUID;
 
 public class ReviewRepositoryImpl extends QueryDslSupport implements ReviewRepositoryCustom {
+
     @Autowired
     public ReviewRepositoryImpl(EntityManager entityManager) {
         super(Review.class, entityManager);
     }
+
     @Override
     public boolean existsByPlaceId(final UUID placeId) {
         return !queryFactory.selectFrom(QReview.review)

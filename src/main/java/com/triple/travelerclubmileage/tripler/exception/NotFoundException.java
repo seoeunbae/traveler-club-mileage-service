@@ -1,6 +1,7 @@
 package com.triple.travelerclubmileage.tripler.exception;
 
 public class NotFoundException extends RuntimeException {
+
     public NotFoundException(String message){
         super(message);
     }

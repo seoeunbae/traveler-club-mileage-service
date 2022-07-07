@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 @Transactional
 @Log4j2
 public class EventController {
+
     private final EventService eventService;
+
     private final ReviewService reviewService;
 
     @PostMapping

@@ -19,22 +19,28 @@ import java.util.UUID;
 @Table(name = "photo")
 @DynamicUpdate
 @DynamicInsert
-public class Photo extends BaseTimeEntity implements Serializable {
+public class Photo extends BaseTimeEntity {
+
     @Id
     @Column(name = "photo_id")
     @Type(type = "uuid-char")
     private UUID id = UUID.randomUUID();
+
     @Column
     private String resource;
+
     @Column
     @Enumerated(EnumType.STRING)
     private PhotoType type;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "review_id", referencedColumnName = "review_id")
     @JsonManagedReference
     private Review review;
+
     @Column
     private Boolean isEnabled;
+
     public enum PhotoType{
         REVIEW, PLACE, USER, AIRPLANE
     }

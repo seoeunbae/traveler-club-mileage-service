@@ -11,17 +11,24 @@ import java.util.UUID;
 @Getter
 @Setter
 public class EventRequest {
+
     @NotNull
     private Event.EventTargetType type;
+
     @NotNull
     private Event.EventActionType action;
+
     @NotNull
     private UUID reviewId;
+
     @NotNull
     private String content;
+
     private UUID[] attachedPhotoIds;
+
     @NotNull
     private UUID userId;
+
     @NotNull
     private UUID placeId;
 
