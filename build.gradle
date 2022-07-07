@@ -62,5 +62,5 @@ configurations {
 	querydsl.extendsFrom compileClasspath
 }
 tasks.withType(JavaCompile) {
-	options.generatedSourceOutputDirectory = file(querydslDir)
+	options.annotationProcessorGeneratedSourcesDirectory = file(querydslDir)
 }
