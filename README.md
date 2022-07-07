@@ -2,14 +2,21 @@
 Mileage service for Triple Traveler Club
 
 # Stack
-SpringBoot2.x, Java 11
-<br/>
-Querydsl, JPA
-<br/>
-H2
-<br/>
-Mockito, Junit 4
-# Database
+**Project:**  SpringBoot2.x, Java 11
+
+
+**ORM:**  Querydsl, JPA
+
+
+**Database:**  H2
+
+
+**TestCode:**  Mockito, Junit 4
+
+
+**Logging:**  Log4j
+
+# ERD
 <img width="739" alt="Screen Shot 2022-07-07 at 4 54 46 PM" src="https://user-images.githubusercontent.com/71380240/177721761-f3d3188e-e052-4fca-87c9-202ecd762c9e.png">
 
 ## Install H2 database before Run application
